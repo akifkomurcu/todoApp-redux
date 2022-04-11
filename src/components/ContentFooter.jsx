@@ -19,7 +19,7 @@ function ContentFooter() {
 
 
             <span className="todo-count">
-                <strong>{itemsLeft == 1 ? itemsLeft + " item left" : itemsLeft + " items left"}</strong>
+                <strong>{itemsLeft == 1 && 0 ? itemsLeft + " item left" : itemsLeft + " items left"}</strong>
 
             </span>
             {/* dispatch(changeActiveFilter('All') */}
