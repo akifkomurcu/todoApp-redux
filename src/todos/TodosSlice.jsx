@@ -13,8 +13,12 @@ export const TodosSlice = createSlice({
             title: 'Learn Redux',
             completed: false,
         }],
+        ActiveFilter: "All",
     },
-    //reducerlar stateleri dağıtır
+
+    //initialState olarak tanımladığımız obje bu state'in içine geliyor
+    //reducer kısmına veriyi manipüle edeceğimiz, yani değiştirebileceğimiz fonksiyonları yazabiliriz. Actionlarımızı yani.
+
     reducers: {
         addTodo: (state, action) => {
             //addTodo'nun amacı state'in altındaki items objesini pushlamak
@@ -22,9 +26,12 @@ export const TodosSlice = createSlice({
         },
         toggle: (state, action) => {
             //toggle'nun amacı state'in altındaki items objesini completed'ını true/false yapmak
-            const { id } = action.payload;
 
+            //action altındaki payload'da kullanıcının gönderdiği id değerini alabiliyoruz.
+            const { id } = action.payload;
+            //bu id'li item'ı bulup completed'ı true/false yapıyoruz.
             const item = state.items.find(item => item.id === id);
+            //objedeki completed true ise false, false ise true yaparız.
             item.completed = !item.completed;
         },
         destroy: (state, action) => {
@@ -34,8 +41,18 @@ export const TodosSlice = createSlice({
             const filtered = state.items.filter(item => item.id !== id);
             state.items = filtered;
         },
+        changeActiveFilter: (state, action) => {
+            //changeActiveFilter'nun amacı state'in altındaki ActiveFilter'ını değiştirmek
+            state.ActiveFilter = action.payload;
+
+        },
+        clearCompleted: (state) => {
+            //tamamlanmamış olan işleri bana veriyor
+            const filtered = state.items.filter(item => item.completed === false)
+            state.items = filtered;
+        }
     },
 });
 //reducerları export ediyoruz
-export const { addTodo, toggle, destroy } = TodosSlice.actions;
+export const { addTodo, toggle, destroy, changeActiveFilter, clearCompleted } = TodosSlice.actions;
 export default TodosSlice.reducer;
