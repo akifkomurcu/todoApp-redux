@@ -11,6 +11,8 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        //input boşsa göndermiyoruz
+        if (!title) return;
         // console.log(title)
         //inputtan aldığımız veriyi dispatch ile redux store'a gönderiyoruz.
         //dispatch'in amacı veriyi manipüle etmemiz için store ulaştırmaktır.

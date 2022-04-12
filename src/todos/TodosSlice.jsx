@@ -55,4 +55,15 @@ export const TodosSlice = createSlice({
 });
 //reducerları export ediyoruz
 export const { addTodo, toggle, destroy, changeActiveFilter, clearCompleted } = TodosSlice.actions;
+
+//selector exports.
+export const selectTodos = state => state.todos.items;
+
+//filtreleme işlemini selector üzerinden yapıp tüm componentlara dağıtıyoruz.
+export const selectFilteredTodos = (state) => {
+    if (state.todos.ActiveFilter === 'All') {
+        return state.todos.items;
+    }
+    return state.todos.items.filter((todo) => state.todos.activeFilter === 'Active' ? todo.completed === false : todo.completed === true);
+}
 export default TodosSlice.reducer;

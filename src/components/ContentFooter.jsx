@@ -22,7 +22,7 @@ function ContentFooter() {
                 <strong>{itemsLeft > 1 ? itemsLeft + " items left" : itemsLeft + " item left"}</strong>
 
             </span>
-            {/* dispatch(changeActiveFilter('All') */}
+
             <ul className="filters">
                 <li>
                     {/* aktif filtre All'a eşitse classname selected olacak */}
