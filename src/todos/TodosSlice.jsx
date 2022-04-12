@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 export const TodosSlice = createSlice({
     name: 'todos',
@@ -20,10 +20,25 @@ export const TodosSlice = createSlice({
     //reducer kısmına veriyi manipüle edeceğimiz, yani değiştirebileceğimiz fonksiyonları yazabiliriz. Actionlarımızı yani.
 
     reducers: {
-        addTodo: (state, action) => {
-            //addTodo'nun amacı state'in altındaki items objesini pushlamak
-            state.items.push(action.payload);
+        addTodo: {
+            reducer: (state, action) => {
+                //addTodo'nun amacı state'in altındaki items objesini pushlamak
+                state.items.push(action.payload);
+            },
+            //prepare'ın yaptığı şey: reducers state'i değiştirmeden önce siz ona gelecek olan payload'u yapılandırabiliyorsun demek.
+
+            //addtodoya gelen dispatch ilk prepare'a ondan sonra reducer'a ve reducer altındaki action'a düşecek.
+            prepare: ({ title }) => {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        title,
+                        completed: false,
+                    }
+                }
+            }
         },
+
         toggle: (state, action) => {
             //toggle'nun amacı state'in altındaki items objesini completed'ını true/false yapmak
 

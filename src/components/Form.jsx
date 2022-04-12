@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../todos/TodosSlice'
-import { nanoid } from '@reduxjs/toolkit'
+
 
 function Form() {
 
@@ -19,7 +19,8 @@ function Form() {
 
         //id olarak uniqe olması için reduxjs/toolkit kütüphanesinde nanoid kullanıldı.
         //title, yukarıdaki state'den dolayısıyla inputtan gelen veridir.
-        dispatch(addTodo({ id: nanoid(), title, completed: false }))
+        //prepare eklendikten sonra id ve completed değerleri sabit olduğu için todoslice'ta bu değerleri prepare içinde tanımladık.
+        dispatch(addTodo({ title }))
         setTitle('')
     }
     return (
